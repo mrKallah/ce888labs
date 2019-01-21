@@ -9,15 +9,14 @@ import random
 
 def boostrap(sample, sample_size, iterations, cl_upper, cl_lower):
 	# create the bootstraps
-	new_samples = []
+	new_samples = np.random.choice(sample, (iterations, sample_size), replace=True)
+	
 	mean = []
 	for iteration in range(iterations):
-		x = []
-		for j in range(sample_size):
-			x.append(sample[random.randint(0,len(sample)-1)])
-		new_samples.append(x)
-		mean.append(new_samples[iteration:])
+		mean.append(np.mean(new_samples[iteration, :]))
+	mean = np.asarray(mean)
 	
+		
 	data_mean = np.mean(new_samples)
 	upper = np.percentile(mean, cl_upper)
 	lower = np.percentile(mean, cl_lower)
