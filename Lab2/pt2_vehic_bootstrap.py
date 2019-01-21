@@ -32,11 +32,16 @@ def run(data, iter):
 if __name__ == "__main__":
 	df = pd.read_csv('./vehicles.csv')
 
-	run(df.values.T[0], 0)
+	x = df.values.T[0]
+	y = df.values.T[1]
 	
-	run(df.values.T[1], 1)
+	x = x[~pd.isnull(x)]
+	y = y[~pd.isnull(y)]
 	
+	run(x, 0)
 	
+	run(y, 1)
+
 
 
 	
